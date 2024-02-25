@@ -15,9 +15,13 @@ export const authSlice = createSlice({
       state.currentUserID = action.payload;
       state.userLoggedIn = !!action.payload;
     },
+    resetCurrentUser(state) {
+      state.currentUserID = '';
+      state.userLoggedIn = false;
+    }
   },
 });
-export const { setCurrentUser } = authSlice.actions;
+export const { setCurrentUser, resetCurrentUser } = authSlice.actions;
 export const initializeUser = () => (dispatch) => {
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {

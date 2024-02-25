@@ -1,11 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { loginSchema } from "./models";
-import { useSignInAccount } from "./hooks/useSignInAccout";
+import { useSignInAccount } from "./hooks/useSignInAccount";
 import ErrorMessage from "../../common/components/formErrorMessage/ErrorMessage";
-import { useLayoutEffect } from "react";
-import { useSelector } from 'react-redux';
+
 function SignIn() {
   const {
     register,
@@ -14,14 +13,6 @@ function SignIn() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
   const signInAccountMutation = useSignInAccount(setError);
-  const isLoggedIn = useSelector(state => state.auth.userLoggedIn)
-  const navigate = useNavigate()
-
-  useLayoutEffect(()=> {
-    if(isLoggedIn) {
-      navigate('/', true);
-    }
-  }, [isLoggedIn, navigate])
 
   const onSubmit = async (data) => {
     await signInAccountMutation.mutateAsync(data);

@@ -25,9 +25,13 @@ export function useSignInAccount(setError) {
           break;
       }
     },
-    onSuccess: () => {
-      dispatch(initializeUser());
-      navigate("/");
+    onSuccess: (res) => {
+      if(res.user.emailVerified) {
+        dispatch(initializeUser());
+        navigate("/");
+      } else {
+        setError('root', {message: `Email is not confirmed. Please check your email: ${res.user.email}`})
+      }
     },
   });
 }

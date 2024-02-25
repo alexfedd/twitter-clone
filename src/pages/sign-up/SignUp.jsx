@@ -5,9 +5,7 @@ import ErrorMessage from "../../common/components/formErrorMessage/ErrorMessage"
 import { useCreateAccount } from "./hooks/useCreateAccount";
 import { registrationSchema } from "./models";
 import './style.scss'
-import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
-import { useLayoutEffect } from "react";
+
 
 function SignUp() {
   const {
@@ -17,14 +15,6 @@ function SignUp() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(registrationSchema) });
   const createAccountMutation = useCreateAccount(setError);
-  const isLoggedIn = useSelector(state => state.auth.userLoggedIn)
-  const navigate = useNavigate()
-
-  useLayoutEffect(()=> {
-    if(isLoggedIn) {
-      navigate('/', true);
-    }
-  }, [isLoggedIn, navigate])
 
   const onSubmit = async (data) => {
     await createAccountMutation.mutateAsync(data);
