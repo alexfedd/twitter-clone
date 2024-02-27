@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../../setup/auth";
 import { useDispatch } from "react-redux";
-import { initializeUser } from "../../../setup/store/reducers/authSlice";
+import { initializeUser, resetCurrentUser } from "../../../setup/store/reducers/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export function useSignInAccount(setError) {
@@ -25,11 +25,13 @@ export function useSignInAccount(setError) {
           break;
       }
     },
-    onSuccess: (res) => {
+    onSuccess: async (res) => {
       if(res.user.emailVerified) {
         dispatch(initializeUser());
         navigate("/");
       } else {
+        await signOut(auth);
+        dispatch(resetCurrentUser());
         setError('root', {message: `Email is not confirmed. Please check your email: ${res.user.email}`})
       }
     },

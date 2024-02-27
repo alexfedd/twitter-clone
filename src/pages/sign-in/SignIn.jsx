@@ -51,7 +51,7 @@ function SignIn() {
             </Link>
           </div>
           {errors.root && <ErrorMessage errorMessage={errors.root.message} />}
-          <button className="sign-form__button">Sign in</button>
+          <button disabled={signInAccountMutation.isPending} type="submit" className="sign-form__button">{signInAccountMutation.isPending ? 'In progress...' : 'Sign in'}</button>
         </form>
       </div>
     </div>

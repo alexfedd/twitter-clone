@@ -1,0 +1,11 @@
+.profile-component {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  gap: 14px;
+  &__image-wrapper {
+    width: 41px;
+    height: 41px;
+  }
+}

@@ -1,0 +1,17 @@
+.follow-button {
+  position: relative;
+  padding: 5px 13px;
+  color: rgb(30, 30, 30);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 2%;
+  border-radius: 16px;
+  background: rgb(239, 243, 244);
+  &--followed {
+    border: 1px solid rgb(29, 155, 240);
+    color: rgb(29, 155, 240);
+    background: none;
+    border-radius: 16px;
+  }
+}

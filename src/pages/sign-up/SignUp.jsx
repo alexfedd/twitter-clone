@@ -12,9 +12,10 @@ function SignUp() {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(registrationSchema) });
-  const createAccountMutation = useCreateAccount(setError);
+  const createAccountMutation = useCreateAccount(setError, reset);
 
   const onSubmit = async (data) => {
     await createAccountMutation.mutateAsync(data);
@@ -32,12 +33,12 @@ function SignUp() {
           <input
             type="text"
             className="sign-form__input input"
-            style={errors.nickName && {border: '1px solid rgb(243, 59, 59)'}}
-            placeholder="Nickname"
-            {...register("nickName")}
+            style={errors.nickname && {border: '1px solid rgb(243, 59, 59)'}}
+            placeholder="nickname"
+            {...register("nickname")}
           />
-          {errors.nickName && (
-            <ErrorMessage errorMessage={errors.nickName.message} />
+          {errors.nickname && (
+            <ErrorMessage errorMessage={errors.nickname.message} />
           )}
           <input
             type="email"
@@ -75,7 +76,7 @@ function SignUp() {
           </div>
           {errors.root && <ErrorMessage errorMessage={errors.root.message} />}
           <button disabled={createAccountMutation.isPending} type="submit" className="sign-form__button">
-            {createAccountMutation.isPending ? 'In progress' : 'Sign up'}
+            {createAccountMutation.isPending ? 'In progress...' : 'Sign up'}
           </button>
         </form>
       </div>

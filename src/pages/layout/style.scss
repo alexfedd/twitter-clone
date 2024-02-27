@@ -1,0 +1,13 @@
+.layout {
+  display: flex;
+  & > div:nth-child(2) {
+    flex: 1 1 100%;
+  }
+  .left-bar-wrapper {
+    flex: 0 0 267px;
+  }
+  .right-bar-wrapper {
+    flex: 0 0 381px;
+  }
+
+}
