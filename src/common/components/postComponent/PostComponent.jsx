@@ -70,6 +70,8 @@ function PostComponent({ postData, amountOfPosts }) {
   };
   const date = new Date(postData.date.seconds * 1000);
   const postDate = `${monthsList[date.getMonth()]} ${date.getDate()}`;
+  const name = (postUserData?.data().name.length > 12) ? `${postUserData?.data().name.substring(0, 8)}...` : postUserData?.data().name
+  const nickname = (postUserData?.data().nickname.length > 12) ? `${postUserData?.data().nickname.substring(0, 8)}...` : postUserData?.data().nickname
   return (
     <div className="post">
       <div className="post__pfp-wrapper">
@@ -77,8 +79,8 @@ function PostComponent({ postData, amountOfPosts }) {
       </div>
       <div className="post__body">
         <div className="post__user-info">
-          <h3 className="title-h3">{postUserData?.data().name}</h3>
-          <span className="subtitle">{postUserData?.data().nickname}</span>
+          <h3 className="title-h3">{name}</h3>
+          <span className="subtitle">{nickname}</span>
           <span className="post__date">{postDate}</span>
         </div>
         <p className="post__content">{postData.content}</p>

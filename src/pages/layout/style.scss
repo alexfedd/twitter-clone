@@ -5,9 +5,17 @@
   }
   .left-bar-wrapper {
     flex: 0 0 267px;
+    @media (max-width: 1200px) {
+      flex: 0 0 200px;
+    }
+    @media (max-width: 1023px) {
+      flex: 0 0 65px;
+    }
   }
   .right-bar-wrapper {
     flex: 0 0 381px;
+    @media (max-width: 1200px) {
+      flex: 0 0 300px;
+    }
   }
-
 }

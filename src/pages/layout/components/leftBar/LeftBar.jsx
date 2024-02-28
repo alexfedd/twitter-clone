@@ -15,7 +15,7 @@ function LeftBar() {
     isLoading: isCurrentUserLoading,
   } = useSelector((state) => state.auth);
   const { data: currentUserData } = useGetUserData(currentUserID, userLoggedIn);
-
+  const {windowWidth} = useSelector(state => state.window)
   if (isCurrentUserLoading) {
     return (
       <div className="layout__left-bar left-bar">
@@ -36,7 +36,7 @@ function LeftBar() {
             }
             to={"/"}
           >
-            <img className="navigation__image" src={homeBtn} /> Home
+            <img className="navigation__image" src={homeBtn} />{(windowWidth > 1023) && 'Home'}
           </NavLink>
         </li>
         <li className="navigation__item">
@@ -48,7 +48,7 @@ function LeftBar() {
             }
             to={"/search"}
           >
-            <img className="navigation__image" src={searchBtn} /> Search
+            <img className="navigation__image" src={searchBtn} />{(windowWidth > 1023) && 'Search'}
           </NavLink>
         </li>
         <li className="navigation__item">
@@ -60,7 +60,7 @@ function LeftBar() {
             }
             to={"/profile/"}
           >
-            <img className="navigation__image" src={profileBtn} /> Profile
+            <img className="navigation__image" src={profileBtn} />{(windowWidth > 1023) && 'Profile'}
           </NavLink>
         </li>
       </ul>

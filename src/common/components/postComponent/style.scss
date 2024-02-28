@@ -11,7 +11,8 @@
   &__user-info {
     display: flex;
     align-items: flex-end;
-    gap: 6px;
+    flex-wrap: wrap;
+    column-gap: 6px;
   }
   &__date {
     color: rgb(47, 51, 54);
