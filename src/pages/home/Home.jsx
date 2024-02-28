@@ -7,7 +7,7 @@ import { useState } from "react";
 import './style.scss'
 import ShowMoreButton from "../../common/components/showMoreButton/ShowMoreButton";
 function Home() {
-  const [numberOfPosts, setNumberOfPosts] = useState(15)
+  const [numberOfPosts, setNumberOfPosts] = useState(3)
   const { userLoggedIn, currentUserID } = useSelector((state) => state.auth);
   const { data: currentUserData } = useGetUserData(currentUserID, userLoggedIn);
   const {data: postsData, isLoading: isPostsLoading, isError: isPostsError, error: postsError} = useGetSomeDocs(numberOfPosts, 'posts')
@@ -22,7 +22,7 @@ function Home() {
           return <PostComponent key={postData.id} postData={postData} amountOfPosts={numberOfPosts}/>
         })}
       </div>
-      <ShowMoreButton />
+      <ShowMoreButton onButtonClick={()=>{setNumberOfPosts((prev)=> prev + 3)}}/>
     </div>
   );
 }

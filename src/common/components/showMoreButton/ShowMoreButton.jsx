@@ -1,6 +1,6 @@
 import './style.scss'
-function ShowMoreButton() {
-  return <button className="show-more-posts">Show more</button>;
+function ShowMoreButton({onButtonClick}) {
+  return <button onClick={onButtonClick} className="show-more-posts">Show more</button>;
 }
 
 export default ShowMoreButton;
