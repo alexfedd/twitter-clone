@@ -10,7 +10,7 @@ function FollowButton({
   userAmount,
 }) {
   const [isFollowed, setIsFollowed] = useState(false);
-  const followHandle = useUpdateData(userAmount);
+  const followHandle = useUpdateData(userAmount, 'users');
   const { currentUserID, userLoggedIn } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {

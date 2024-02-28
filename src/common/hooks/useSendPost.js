@@ -8,7 +8,7 @@ export function useSendPost(setError, numberOfPosts) {
   const authorId = useSelector((state) => state.auth.currentUserID);
   const { data: authorData } = useGetUserData(authorId);
   const queryClient = useQueryClient();
-  const handleUpdateUser = useUpdateData(-1);
+  const handleUpdateUser = useUpdateData(-1, 'users');
   return useMutation({
     mutationFn: async (data) => {
       const newDocData = {

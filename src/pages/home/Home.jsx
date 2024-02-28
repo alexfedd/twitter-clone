@@ -5,6 +5,7 @@ import { useGetSomeDocs } from "../../common/hooks/useGetSomeDocs";
 import PostComponent from "../../common/components/postComponent/PostComponent";
 import { useState } from "react";
 import './style.scss'
+import ShowMoreButton from "../../common/components/showMoreButton/ShowMoreButton";
 function Home() {
   const [numberOfPosts, setNumberOfPosts] = useState(15)
   const { userLoggedIn, currentUserID } = useSelector((state) => state.auth);
@@ -18,9 +19,10 @@ function Home() {
       {userLoggedIn && <PostForm currentUserData={currentUserData} numberOfPosts={numberOfPosts} />}
       <div className="home__posts-list">
         {isPostsError ? <p>Something went wrong... {postsError.message}</p> : postsData.map(postData => {
-          return <PostComponent key={postData.id} postData={postData}/>
+          return <PostComponent key={postData.id} postData={postData} amountOfPosts={numberOfPosts}/>
         })}
       </div>
+      <ShowMoreButton />
     </div>
   );
 }
