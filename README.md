@@ -1,8 +1,24 @@
-# React + Vite
+# Клон твиттера на реакте + firebase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Мой первый пет-проект на реакте. 
+**В данный момент все еще в разработке**
+При разработке использовались различные реакт библиотеки, а также вместо разработки бекэнда был использован Firebase
 
-Currently, two official plugins are available:
+Стек технологий:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Верстка: React, SCSS
+
+Разработка дизайна: Figma
+
+Доп. библиотеки: react-router-dom, @tanstack/react-query, redux toolkit, firebase, react-hook-form, yup 
+
+
+
+
+## 🔗 Ссылка
+
+ [Клон твиттера](https://alexfedd.github.io/twitter-clone/)
+
+
+## Картинки
+![]()
