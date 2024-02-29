@@ -22,6 +22,9 @@
   }
   &__navigation {
     flex: 1 1 auto;
+    @media (max-width: 767px) {
+      flex: 0 1 auto;
+    }
   }
 }
 .navigation {

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useGetFileByURL } from "../../../../../common/hooks/useGetFileByUrl";
 function AccountSettings({ userLoggedIn, currentUserData }) {
   const signOutHandle = useSignOut();
-  const { data: currentUserPfp } = useGetFileByURL(currentUserData?.data().pfp);
+  const { data: currentUserPfp } = useGetFileByURL(userLoggedIn ? currentUserData?.data().pfp : "default_pfp.svg");
   const { windowWidth } = useSelector((state) => state.window);
   const [isModalOpen, toggleModal] = useToggle();
   return (
