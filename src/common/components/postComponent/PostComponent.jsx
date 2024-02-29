@@ -7,7 +7,7 @@ import { useGetFileByURL } from "../../hooks/useGetFileByUrl";
 import { monthsList } from "./models";
 import "./style.scss";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUpdateData } from "../../hooks/useUpdateData";
 function PostComponent({ postData, amountOfPosts }) {
   const [isLiked, setIsLiked] = useState(false);
@@ -73,7 +73,7 @@ function PostComponent({ postData, amountOfPosts }) {
   const name = (postUserData?.data().name.length > 12) ? `${postUserData?.data().name.substring(0, 8)}...` : postUserData?.data().name
   const nickname = (postUserData?.data().nickname.length > 12) ? `${postUserData?.data().nickname.substring(0, 8)}...` : postUserData?.data().nickname
   return (
-    <div className="post">
+    <Link to={`/post/${postData.id}`} className="post">
       <div className="post__pfp-wrapper">
         <img src={postUserPfpUrl} alt="" className="post__pfp" />
       </div>
@@ -89,13 +89,16 @@ function PostComponent({ postData, amountOfPosts }) {
             <img src={commentBtn} alt="" className="post__func-image" />
             {postData.comments.length}
           </div>
-          <div className="post__func" onClick={()=> {handleOnClick()}}>
+          <div className="post__func" onClick={(e)=> {
+            e.preventDefault();
+            handleOnClick();
+            }}>
             <img src={isLiked ? activeLikeBtn : likeBtn} alt="" className="post__func-image" />
             {likes.length}
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

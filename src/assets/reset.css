@@ -16,7 +16,9 @@
 a, a:link, a:visited  {
     text-decoration: none;
 }
-
+a {
+    color: unset;
+}
 a:hover  {
     text-decoration: none;
 }

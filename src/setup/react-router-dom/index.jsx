@@ -12,6 +12,14 @@ export const router = createHashRouter([
             {
                 index: true,
                 element: <Home/>
+            },
+            {
+                path: '/post/:postId',
+                element: <p>This is a post page</p>
+            },
+            {
+                path: '/profile/:userId',
+                element: <p>This is a user page</p>
             }
         ]
     },
