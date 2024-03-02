@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import { db } from '../../setup/auth';
 
@@ -17,6 +17,7 @@ export function useGetSomeDocs(numberOfItems, bdKey) {
             const querySnapshot = await getDocs(q);
             const users = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             return users;
-        }
+        },
+        placeholderData: keepPreviousData,
     });
 }

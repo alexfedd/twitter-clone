@@ -5,7 +5,7 @@ import "./style.scss";
 import { useGetSomeDocs } from "../../../../common/hooks/useGetSomeDocs";
 function RightBar() {
   const USER_AMOUNT = 8;
-  const { data: usersData, isLoading } = useGetSomeDocs(USER_AMOUNT, 'users');
+  const { data: usersData, isLoading } = useGetSomeDocs(USER_AMOUNT, 'users', []);
   const { currentUserID } = useSelector((state) => state.auth);
   if (isLoading) {
     return <p>Loading...</p>;

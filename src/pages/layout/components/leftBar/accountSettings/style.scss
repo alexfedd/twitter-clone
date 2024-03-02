@@ -23,14 +23,16 @@
     bottom: -15px;
     background-color: #16181c;
   }
-  &::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 22px;
-    background: url("./../../../../../assets/svg/optionDots.svg");
+  @media (min-width: 1024px) {
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 22px;
+      background: url("./../../../../../assets/svg/optionDots.svg");
+    }
   }
 }
