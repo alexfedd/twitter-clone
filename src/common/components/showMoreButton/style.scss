@@ -1,0 +1,12 @@
+.show-more-posts {
+    padding: 25px;
+    width: 100%;
+    align-self: center;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    @media (hover: hover) {
+        &:hover {
+            color: #1d9bf0;
+            background-color: #16181c;
+        }
+    }
+}

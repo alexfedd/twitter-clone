@@ -1,0 +1,150 @@
+@import "./assets/reset.css";
+* {
+  //border: red solid 1px;
+}
+body {
+  background-color: #000000;
+  color: #e7e9ea;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+#root {
+  min-height: inherit;
+}
+.container {
+  min-height: inherit;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 97px;
+  padding-right: 97px;
+  @media (max-width: 1439px) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  @media (max-width: 1023px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @media (max-width: 768px) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.title-h2 {
+  color: rgb(231, 233, 234);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.title-h3 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21px;
+}
+
+.subtitle {
+  color: rgb(114, 119, 124);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 19px;
+}
+
+.input {
+  border: 1px solid rgb(47, 51, 54);
+  border-radius: 4px;
+  padding: 17px 9px 20px;
+  color: #e7e9ea;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  &:focus {
+    box-shadow: #e7e9ea30 0px 0px 30px !important;
+  }
+  &::placeholder {
+    color: rgb(114, 119, 124);
+  }
+}
+
+.container__sign-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    color: rgb(231, 233, 234);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 43px;
+    text-align: center;
+  }
+}
+
+.sign-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  &__input {
+    width: 440px;
+    & + & {
+      margin-top: 28px;
+    }
+    @media (max-width: 767px) {
+      width: 100%;
+      min-width: 300px;
+    }
+  }
+  &__sign-option {
+    margin-top: 48px;
+  }
+  &__span {
+    color: rgb(114, 119, 124);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+  }
+  &__link {
+    margin-left: 4px;
+    color: rgb(29, 155, 240);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline !important;
+      }
+    }
+  }
+  &__button {
+    margin-top: 30px;
+    padding: 13px 0;
+    width: 100%;
+    border-radius: 26.5px;
+    background: rgb(231, 233, 234);
+    color: rgb(30, 30, 30);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:disabled {
+      background-color: rgb(160, 160, 160);
+    }
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgb(191, 193, 194);
+      }
+    }
+  }
+  &__error {
+    color: rgb(243, 59, 59);
+    margin-bottom: 6px;
+    max-width: 440px;
+  }
+}

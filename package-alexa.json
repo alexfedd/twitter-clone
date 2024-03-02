@@ -1,0 +1,40 @@
+{
+  "name": "twitter-clone",
+  "homepage": "https://alexfedd.github.io/twitter-clone/",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@reduxjs/toolkit": "^2.2.1",
+    "@tanstack/react-query": "^5.22.2",
+    "@tanstack/react-query-devtools": "^5.24.0",
+    "axios": "^1.6.7",
+    "firebase": "^10.8.0",
+    "gh-pages": "^6.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.1",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.1",
+    "sass": "^1.71.1",
+    "yup": "^1.3.3"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.20.1",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "vite": "^5.1.4"
+  }
+}
