@@ -1,14 +1,19 @@
-import { useGetUsers } from "../../../../common/hooks/useGetUsers";
 import { useSelector } from "react-redux";
 import UserCard from "./components/UserName/UserCard";
 import "./style.scss";
 import { useGetSomeDocs } from "../../../../common/hooks/useGetSomeDocs";
+import { collection, limit, query } from "firebase/firestore";
+import { db } from "../../../../setup/auth";
+import Loader from "../../../../common/components/loader/loader";
 function RightBar() {
   const USER_AMOUNT = 8;
-  const { data: usersData, isLoading } = useGetSomeDocs(USER_AMOUNT, 'users', []);
+  const q = query(collection(db,'users'), limit(USER_AMOUNT))
+  const { data: usersData, isLoading } = useGetSomeDocs(USER_AMOUNT, 'users', q);
   const { currentUserID } = useSelector((state) => state.auth);
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div className="layout__right-bar right-bar">
+      <Loader />
+    </div>;
   }
   return (
     <div className="layout__right-bar right-bar">

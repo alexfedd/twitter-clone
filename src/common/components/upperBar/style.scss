@@ -1,0 +1,15 @@
+.upper-bar {
+  padding: 13px 20px;
+  display: flex;
+  gap: 33px;
+  &__button {
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    @media (hover: hover) {
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+  }
+}

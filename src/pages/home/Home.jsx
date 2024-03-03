@@ -1,26 +1,41 @@
 import { useSelector } from "react-redux";
 import PostForm from "./components/PostForm/PostForm";
-import { useGetUserData } from "./../../common/hooks/useGetUserData";
+import { useGetDocData } from "../../common/hooks/useGetDocData";
 import { useGetSomeDocs } from "../../common/hooks/useGetSomeDocs";
 import PostComponent from "../../common/components/postComponent/PostComponent";
 import { useState } from "react";
 import "./style.scss";
 import ShowMoreButton from "../../common/components/showMoreButton/ShowMoreButton";
 import { useGetCountFromServer } from "../../common/hooks/useGetCountFromServer";
+import { collection, limit, orderBy, query } from "firebase/firestore";
+import { db } from "../../setup/auth";
+import Loader from "../../common/components/loader/loader";
 function Home() {
   const [numberOfPosts, setNumberOfPosts] = useState(15);
   const { userLoggedIn, currentUserID } = useSelector((state) => state.auth);
-  const { data: currentUserData } = useGetUserData(currentUserID, userLoggedIn);
-  const { data: postsCount } = useGetCountFromServer("posts");
+  const { data: currentUserData } = useGetDocData(currentUserID, "users");
+  const { data: postsCount, error } = useGetCountFromServer(
+    "posts",
+    query(collection(db, "posts"))
+  );
+  const q = query(
+    collection(db, "posts"),
+    limit(numberOfPosts),
+    orderBy("date", "desc")
+  );
   const {
     data: postsData,
     isLoading: isPostsLoading,
     isRefetching: isPostsRefetching,
     isError: isPostsError,
     error: postsError,
-  } = useGetSomeDocs(numberOfPosts, "posts");
+  } = useGetSomeDocs(numberOfPosts, "posts", q);
   if (isPostsLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="home">
+        <Loader />
+      </div>
+    );
   }
   return (
     <div className="home">

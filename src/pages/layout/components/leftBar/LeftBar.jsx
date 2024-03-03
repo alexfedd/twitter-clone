@@ -3,10 +3,11 @@ import homeBtn from "./../../../../assets/svg/layout/homeBtn.svg";
 import searchBtn from "./../../../../assets/svg/layout/searchBtn.svg";
 import profileBtn from "./../../../../assets/svg/layout/profileBtn.svg";
 import { NavLink } from "react-router-dom";
-import { useGetUserData } from "../../../../common/hooks/useGetUserData";
+import { useGetDocData } from "../../../../common/hooks/useGetDocData";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import AccountSettings from "./accountSettings/AccountSettings";
+import Loader from "../../../../common/components/loader/loader";
 
 function LeftBar() {
   const {
@@ -14,12 +15,12 @@ function LeftBar() {
     userLoggedIn,
     isLoading: isCurrentUserLoading,
   } = useSelector((state) => state.auth);
-  const { data: currentUserData } = useGetUserData(currentUserID, userLoggedIn);
+  const { data: currentUserData } = useGetDocData(currentUserID, 'users');
   const {windowWidth} = useSelector(state => state.window)
   if (isCurrentUserLoading) {
     return (
       <div className="layout__left-bar left-bar">
-        <p>Loading...</p>
+        <Loader />
       </div>
     );
   }

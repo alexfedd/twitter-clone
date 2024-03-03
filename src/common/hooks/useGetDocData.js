@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "../../setup/auth";
 
-export function useGetUserData(uid) {
-    const userCollectionRef = collection(db, "users");
+export function useGetDocData(id, dbKey) {
+    const userCollectionRef = collection(db, dbKey);
     return useQuery({
-        queryKey: ['userData', uid],
+        queryKey: [`${dbKey.slice(0, -1)}Data`, id],
         queryFn: async () => {
-            return (await getDoc(doc(userCollectionRef, uid)))
+            return (await getDoc(doc(userCollectionRef, id)))
         }
     })
 }

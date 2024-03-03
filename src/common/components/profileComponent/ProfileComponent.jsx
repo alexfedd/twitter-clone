@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import "./style.scss";
 import { useGetFileByURL } from './../../hooks/useGetFileByUrl';
+import Loader from "../loader/loader";
 function ProfileComponent({ pfpUrl, nickname, name }) {
   const { data: currentUserPfp, isPending } = useGetFileByURL(pfpUrl);
   if(isPending) {
-    return <p>Loading...</p>
+    return <Loader />
   }
   return (
     <div className="profile-component">

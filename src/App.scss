@@ -11,6 +11,7 @@ body {
 }
 #root {
   min-height: inherit;
+  position: relative;
 }
 .container {
   min-height: inherit;
@@ -50,6 +51,17 @@ body {
   font-size: 14px;
   font-weight: 300;
   line-height: 19px;
+}
+
+.global-message {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    font-size: 20px;
+    color: #e7e9ea;
+  }
 }
 
 .input {

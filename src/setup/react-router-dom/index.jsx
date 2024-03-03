@@ -3,6 +3,7 @@ import Home from "../../pages/home/Home";
 import SignIn from "../../pages/sign-in/SignIn";
 import SignUp from "../../pages/sign-up/SignUp";
 import Layout from "../../pages/layout/Layout";
+import Post from "../../pages/post/Post";
 
 export const router = createHashRouter([
     {
@@ -15,7 +16,7 @@ export const router = createHashRouter([
             },
             {
                 path: '/post/:postId',
-                element: <p>This is a post page</p>
+                element: <Post/>
             },
             {
                 path: '/profile/:userId',

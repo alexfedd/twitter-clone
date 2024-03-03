@@ -9,8 +9,11 @@ function FollowButton({
   uid,
   userAmount,
 }) {
+  const [userFollowersState, setUserFollowersState] = useState(userFollowers);
+  const [curUserFollowingState, setCurUserFollowingState] =
+    useState(currentUserFollowing);
   const [isFollowed, setIsFollowed] = useState(false);
-  const followHandle = useUpdateData(userAmount, 'users');
+  const followHandle = useUpdateData(userAmount, "users");
   const { currentUserID, userLoggedIn } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +23,7 @@ function FollowButton({
       setIsFollowed(false);
     }
   }, [userLoggedIn]);
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     if (!userLoggedIn) {
       navigate("/sign-in");
       return;
@@ -49,17 +52,24 @@ function FollowButton({
       },
     };
     try {
-      followHandle.mutate(userArgs);
-      followHandle.mutate(currentUserArgs);
+      await Promise.all([
+        followHandle.mutateAsync(userArgs),
+        followHandle.mutateAsync(currentUserArgs),
+      ]);
     } catch (error) {
       setIsFollowed((prev) => {
         return !prev;
       });
-      followHandle.mutate({ uid: uid, newField: { followers: userFollowers } });
-      followHandle.mutate({
-        uid: currentUserID,
-        newField: { followers: currentUserFollowing },
-      });
+      await Promise.all([
+        followHandle.mutateAsync({
+          uid: uid,
+          newField: { followers: userFollowers },
+        }),
+        followHandle.mutateAsync({
+          uid: currentUserID,
+          newField: { followers: currentUserFollowing },
+        }),
+      ]);
     }
   };
   return (

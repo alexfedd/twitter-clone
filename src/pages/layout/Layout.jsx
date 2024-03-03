@@ -5,6 +5,7 @@ import "./style.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { setWindowWidth } from "../../setup/store/reducers/windowSlice";
 import { useEffect } from "react";
+import Loader from "../../common/components/loader/loader";
 function Layout() {
   const { isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function Layout() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
   return (
     <div className="container layout">
