@@ -5,6 +5,7 @@ import SignUp from "../../pages/sign-up/SignUp";
 import Layout from "../../pages/layout/Layout";
 import Post from "../../pages/post/Post";
 
+
 export const router = createHashRouter([
     {
         path: '/',

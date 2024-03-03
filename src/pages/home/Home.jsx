@@ -14,7 +14,7 @@ function Home() {
   const [numberOfPosts, setNumberOfPosts] = useState(15);
   const { userLoggedIn, currentUserID } = useSelector((state) => state.auth);
   const { data: currentUserData } = useGetDocData(currentUserID, "users");
-  const { data: postsCount, error } = useGetCountFromServer(
+  const { data: postsCount } = useGetCountFromServer(
     "posts",
     query(collection(db, "posts"))
   );
@@ -44,7 +44,7 @@ function Home() {
           currentUserData={currentUserData}
           numberOfPosts={numberOfPosts}
         />
-      )}
+      )} 
       <div className="home__posts-list">
         {isPostsError ? (
           <p>Something went wrong... {postsError.message}</p>

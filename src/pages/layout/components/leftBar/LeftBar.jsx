@@ -1,6 +1,5 @@
 import twitterLogo from "./../../../../assets/svg/layout/twitter-logo.svg";
 import homeBtn from "./../../../../assets/svg/layout/homeBtn.svg";
-import searchBtn from "./../../../../assets/svg/layout/searchBtn.svg";
 import profileBtn from "./../../../../assets/svg/layout/profileBtn.svg";
 import { NavLink } from "react-router-dom";
 import { useGetDocData } from "../../../../common/hooks/useGetDocData";
@@ -38,18 +37,6 @@ function LeftBar() {
             to={"/"}
           >
             <img className="navigation__image" src={homeBtn} />{(windowWidth > 1023) && 'Home'}
-          </NavLink>
-        </li>
-        <li className="navigation__item">
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "navigation__link navigation__link--active"
-                : "navigation__link"
-            }
-            to={"/search"}
-          >
-            <img className="navigation__image" src={searchBtn} />{(windowWidth > 1023) && 'Search'}
           </NavLink>
         </li>
         <li className="navigation__item">
