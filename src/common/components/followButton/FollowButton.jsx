@@ -52,10 +52,14 @@ function FollowButton({
       },
     };
     try {
+      console.log(userFollowersState);
+      console.log(curUserFollowingState);
       await Promise.all([
         followHandle.mutateAsync(userArgs),
         followHandle.mutateAsync(currentUserArgs),
       ]);
+      setUserFollowersState(userArgs.newField.followers)
+      setCurUserFollowingState(currentUserArgs.newField.following)
     } catch (error) {
       setIsFollowed((prev) => {
         return !prev;

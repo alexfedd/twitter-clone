@@ -13,6 +13,7 @@ import CommentForm from "./components/commentForm/commentForm";
 import "./style.scss";
 import Loader from "../../common/components/loader/loader";
 import ShowMoreButton from "../../common/components/showMoreButton/ShowMoreButton";
+import FollowButton from "../../common/components/followButton/FollowButton";
 function Post() {
   const { postId } = useParams();
   const [numberOfPosts, setNumberOfPosts] = useState(15);
@@ -23,7 +24,13 @@ function Post() {
   } = useGetDocData(postId, "posts");
   const { userLoggedIn, currentUserID } = useSelector((state) => state.auth);
   const { data: currentUserData } = useGetDocData(currentUserID, "users");
-  const { data: postsCount, refetch: countRefetch } = useGetCountFromServer('posts', query(collection(db, 'posts'), where("parentPost", "==", currentPostData?.id || null)));
+  const { data: postsCount, refetch: countRefetch } = useGetCountFromServer(
+    "posts",
+    query(
+      collection(db, "posts"),
+      where("parentPost", "==", currentPostData?.id || null)
+    )
+  );
   const {
     data: commentsList,
     isLoading: isCommentsLoading,
@@ -56,6 +63,7 @@ function Post() {
       <UpperBar>
         <h1 className="title-h2">Post</h1>
       </UpperBar>
+
       <CurrentPostComponent postData={currentPostData} postId={postId} />
       {userLoggedIn && (
         <CommentForm

@@ -15,7 +15,8 @@ export function useUpdateData(queryKey, dbKey) {
         onError: (error) => {
             console.log(error.message);
         },
-        onSuccess: async () => {
+        onSuccess: async (_, variables) => {
+            await queryClient.invalidateQueries({queryKey: ['userData', variables.uid]})
             await queryClient.invalidateQueries({queryKey: [dbKey, queryKey]})
         }
     })
