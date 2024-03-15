@@ -1,0 +1,93 @@
+.profile-page {
+  &__profile-info-upper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+    padding: 0 15px;
+    margin-top: 15px;
+  }
+  &__banner {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background-color: #2f3336;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  &__pfp {
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    transform: translateY(50%);
+    width: 135px;
+    height: 135px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+  &__main-info {
+    margin-top: 36px;
+    padding: 0 15px;
+  }
+  &__description {
+    margin-top: 20px;
+    width: 100%;
+  }
+  &__user-meta {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  &__meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  &__meta-text {
+    color: rgb(114, 119, 124);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+  }
+  &__follows-info {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  &__follow-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgb(114, 119, 124);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 2%;
+  }
+  &__follow-number {
+    font-weight: 700;
+    color: #ffffff;
+  }
+  &__edit-btn {
+    display: inline-block;
+    padding: 5px 13px;
+    color: rgb(231, 233, 234);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 2%;
+    text-align: center;
+    border: 1px solid rgb(231, 233, 234);
+    border-radius: 16px;
+  }
+}

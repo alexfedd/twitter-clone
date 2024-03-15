@@ -1,5 +1,5 @@
 import UpperBar from "../../common/components/upperBar/upperBar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetDocData } from "../../common/hooks/useGetDocData";
 import Loader from "../../common/components/loader/loader";
 import { useGetCountFromServer } from "../../common/hooks/useGetCountFromServer";
@@ -11,15 +11,19 @@ import PostComponent from "../../common/components/postComponent/PostComponent";
 import ShowMoreButton from "../../common/components/showMoreButton/ShowMoreButton";
 import FollowButton from "../../common/components/followButton/FollowButton";
 import { useSelector } from "react-redux";
-import locationIcon from './../../assets/svg/profile/location.svg'
-import dateIcon from './../../assets/svg/profile/date.svg'
+import locationIcon from "./../../assets/svg/profile/location.svg";
+import dateIcon from "./../../assets/svg/profile/date.svg";
 import { monthsList } from "../../common/components/postComponent/models";
+import { useGetFileByURL } from "../../common/hooks/useGetFileByUrl";
+import "./style.scss";
 function Profile() {
   const { userId } = useParams();
   const [numberOfPosts, setNumberOfPosts] = useState(15);
   const { currentUserID } = useSelector((state) => state.auth);
   const { data: currentUserData } = useGetDocData(currentUserID, "users");
   const { data: userData, isLoading } = useGetDocData(userId, "users");
+  const { data: pfpImage } = useGetFileByURL(userData?.data().pfp);
+  const { data: bannerImage } = useGetFileByURL(userData?.data().banner);
   const { data: postsCount, refetch: countRefetch } = useGetCountFromServer(
     "posts",
     query(
@@ -67,10 +71,19 @@ function Profile() {
         </div>
       </UpperBar>
       <div className="profile-page__profile-info">
+        <div className="profile-page__banner image-wrapper">
+          {bannerImage && (
+            <img src={bannerImage} alt="" className="image-wrapper__image" />
+          )}
+          <div className="profile-page__pfp image-wrapper">
+            <img src={pfpImage} alt="" className="image-wrapper__image" />
+          </div>
+        </div>
         <div className="profile-page__profile-info-upper">
-          <div className="profile-page__banner"></div>
           {userId === currentUserID ? (
-            ""
+            <Link to={"/"} className="profile-page__edit-btn">
+              Edit profile
+            </Link>
           ) : (
             <FollowButton
               uid={userId}
@@ -84,12 +97,18 @@ function Profile() {
           <h2 className="title-h2">{userData?.data().name}</h2>
           <span className="subtitle">{userData?.data().nickname}</span>
           <p className="profile-page__description text">
-          {userData?.data().description === '' ? "No description" : userData?.data().description}
+            {userData?.data().description === ""
+              ? "No description"
+              : userData?.data().description}
           </p>
           <div className="profile-page__user-meta">
             <div className="profile-page__meta-item">
               <img src={locationIcon} alt="" className="profile-page__icon" />
-              <p className="profile-page__meta-text">{userData?.data().location === '' ? "No location" : userData?.data().location}</p>
+              <p className="profile-page__meta-text">
+                {userData?.data().location === ""
+                  ? "No location"
+                  : userData?.data().location}
+              </p>
             </div>
             <div className="profile-page__meta-item">
               <img src={dateIcon} alt="" className="profile-page__icon" />
@@ -98,10 +117,16 @@ function Profile() {
           </div>
           <div className="profile-page__follows-info">
             <p className="profile-page__follow-info">
-                <span className="profile-page__follow-number">{userData?.data().following.length}</span> Following
+              <span className="profile-page__follow-number">
+                {userData?.data().following.length}
+              </span>{" "}
+              Following
             </p>
             <p className="profile-page__follow-info">
-                <span className="profile-page__follow-number">{userData?.data().followers.length}</span> Followers
+              <span className="profile-page__follow-number">
+                {userData?.data().followers.length}
+              </span>{" "}
+              Followers
             </p>
           </div>
         </div>
@@ -114,11 +139,11 @@ function Profile() {
             <p className="global-message__text">No replies</p>
           </div>
         ) : (
-          postsList?.map((comment) => {
+          postsList?.map((post) => {
             return (
               <PostComponent
-                key={comment.id}
-                postData={comment}
+                key={post.id}
+                postData={post}
                 amountOfPosts={numberOfPosts}
               />
             );
