@@ -12,7 +12,7 @@ export function useSignInAccount(setError) {
     mutationFn: (data) =>
       signInWithEmailAndPassword(auth, data.email, data.password),
     onError: (error) => {
-      console.log(error.message);
+      console.error(error.message);
       switch (error.message) {
         case "Firebase: Error (auth/invalid-credential).":
           setError("root", { message: "Wrong email or password" });

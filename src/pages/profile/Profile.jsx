@@ -102,14 +102,17 @@ function Profile() {
               : userData?.data().description}
           </p>
           <div className="profile-page__user-meta">
-            <div className="profile-page__meta-item">
-              <img src={locationIcon} alt="" className="profile-page__icon" />
-              <p className="profile-page__meta-text">
-                {userData?.data().location === ""
-                  ? "No location"
-                  : userData?.data().location}
-              </p>
-            </div>
+            {userData?.data().location !== "" ? (
+              <div className="profile-page__meta-item">
+                <img src={locationIcon} alt="" className="profile-page__icon" />
+
+                <p className="profile-page__meta-text">
+                  {userData?.data().location}
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="profile-page__meta-item">
               <img src={dateIcon} alt="" className="profile-page__icon" />
               <p className="profile-page__meta-text">Joined {joinDate}</p>
@@ -130,13 +133,14 @@ function Profile() {
             </p>
           </div>
         </div>
+        <h2 className="profile-page__posts-title title-h3">Posts</h2>
       </div>
       <div className="profile-page__posts">
         {isPostsLoading ? (
           <Loader />
         ) : postsList?.length === 0 ? (
           <div className="global-message">
-            <p className="global-message__text">No replies</p>
+            <p className="global-message__text">No posts</p>
           </div>
         ) : (
           postsList?.map((post) => {

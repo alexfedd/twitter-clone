@@ -11,7 +11,7 @@ export function useSignOut() {
     return useMutation({
         mutationFn: () => signOut(auth),
         onError: (error) => {
-            console.log(error.message);
+            console.error(error.message);
         },
         onSuccess: () => {
             dispatch(resetCurrentUser())

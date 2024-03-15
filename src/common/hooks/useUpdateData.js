@@ -13,7 +13,7 @@ export function useUpdateData(queryKey, dbKey) {
             return updateDoc(userRef, data.newField)
         },
         onError: (error) => {
-            console.log(error.message);
+            console.error(error.message);
         },
         onSuccess: async (_, variables) => {
             await queryClient.invalidateQueries({queryKey: ['userData', variables.uid]})

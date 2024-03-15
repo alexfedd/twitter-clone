@@ -9,7 +9,6 @@ export const windowSlice = createSlice({
   initialState,
   reducers: {
     setWindowWidth (state, action) {
-        console.log(action.payload);
         state.windowWidth = action.payload
     }
 

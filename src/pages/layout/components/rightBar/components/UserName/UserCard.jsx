@@ -1,9 +1,16 @@
+import { Link, useNavigate } from "react-router-dom";
 import FollowButton from "../../../../../../common/components/followButton/FollowButton";
 import ProfileComponent from "../../../../../../common/components/profileComponent/ProfileComponent";
-import './style.scss';
+import "./style.scss";
 function UserCard({ user, currentUserFollowing, userAmount }) {
+  const navigate = useNavigate();
   return (
-    <div className="user-card">
+    <div
+      onClick={() => {
+        navigate(`/profile/${user.id}`);
+      }}
+      className="user-card"
+    >
       <ProfileComponent
         nickname={user.nickname}
         name={user.name}

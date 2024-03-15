@@ -23,7 +23,8 @@ function FollowButton({
       setIsFollowed(false);
     }
   }, [userLoggedIn]);
-  const handleOnClick = async () => {
+  const handleOnClick = async (e) => {
+    e.stopPropagation()
     if (!userLoggedIn) {
       navigate("/sign-in");
       return;
@@ -52,8 +53,6 @@ function FollowButton({
       },
     };
     try {
-      console.log(userFollowersState);
-      console.log(curUserFollowingState);
       await Promise.all([
         followHandle.mutateAsync(userArgs),
         followHandle.mutateAsync(currentUserArgs),
@@ -81,7 +80,7 @@ function FollowButton({
       className={
         isFollowed ? "follow-button follow-button--followed" : "follow-button"
       }
-      onClick={handleOnClick}
+      onClick={(e) => {handleOnClick(e)}}
     >
       {isFollowed ? "Following" : "Follow"}
     </button>

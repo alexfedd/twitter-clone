@@ -17,7 +17,6 @@ function RightBar() {
       <Loader />
     </div>;
   }
-  console.log('render');
   return (
     <div className="layout__right-bar right-bar">
       <div className="right-bar__users">

@@ -35,7 +35,9 @@ function PostComponent({ postData, amountOfPosts }) {
   return (
     <div className="post">
       {postData.parentPost && postData.parentPost != "" ? (
-        <p className="post__parent">Answered on <Link to={`/post/${postData.parentPost}`}>post</Link></p>
+        <p className="post__parent">
+          Answered on <Link to={`/post/${postData.parentPost}`}>post</Link>
+        </p>
       ) : (
         ""
       )}
@@ -45,9 +47,15 @@ function PostComponent({ postData, amountOfPosts }) {
         onMouseUp={handleMouseUp}
         className="post__post"
       >
-        <div className="post__pfp-wrapper">
+        <Link
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          to={`/profile/${postData.authorId}`}
+          className="post__pfp-wrapper"
+        >
           <img src={postUserPfpUrl} alt="" className="post__pfp" />
-        </div>
+        </Link>
         <div className="post__body">
           <Link
             to={`/profile/${postData.authorId}`}

@@ -23,7 +23,6 @@ export function useSendPost(setError, numberOfPosts, parentPostData) {
       return await addDoc(collectionRef, newDocData);
     },
     onError: (error) => {
-      console.log(error.message);
       setError("root", { message: "Something went wrong! Try later" });
     },
     onSuccess: async (data, inputData) => {
@@ -31,7 +30,6 @@ export function useSendPost(setError, numberOfPosts, parentPostData) {
         uid: authorId,
         newField: { posts: [...authorData?.data().posts, data.path] },
       });
-      console.log(inputData);
       if(inputData?.parentPost && inputData.parentPost !== '') {
         await hadnleUpdatePost.mutateAsync({uid: inputData.parentPost, newField: {comments: [...parentPostData?.data().comments, data.id]}})
         await queryClient.invalidateQueries({queryKey: ['postData', inputData.parentPost]});

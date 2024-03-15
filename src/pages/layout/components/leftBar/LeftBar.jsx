@@ -46,7 +46,7 @@ function LeftBar() {
                 ? "navigation__link navigation__link--active"
                 : "navigation__link"
             }
-            to={"/profile/"}
+            to={userLoggedIn ? `/profile/${currentUserID}` : '/sign-in'}
           >
             <img className="navigation__image" src={profileBtn} />{(windowWidth > 1023) && 'Profile'}
           </NavLink>
