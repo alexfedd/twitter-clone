@@ -3,26 +3,29 @@ import { useUpdateData } from "../../hooks/useUpdateData";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
+import { useAddToDocArray } from "../../hooks/useAddToDocArray";
+import { useRemoveFromDocArray } from "../../hooks/useRemoveFromDocArray";
 function FollowButton({
   userFollowers,
   currentUserFollowing,
   uid,
   userAmount,
 }) {
-  const [userFollowersState, setUserFollowersState] = useState(userFollowers);
-  const [curUserFollowingState, setCurUserFollowingState] =
-    useState(currentUserFollowing);
   const [isFollowed, setIsFollowed] = useState(false);
-  const followHandle = useUpdateData(userAmount, "users");
+  const abortChanges = useUpdateData(userAmount, "users");
+  const handleFollow = useAddToDocArray(userAmount, 'users');
+  const handleUnfollow = useRemoveFromDocArray(userAmount, 'users');
   const { currentUserID, userLoggedIn } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (userLoggedIn && userFollowers.includes(currentUserID)) {
       setIsFollowed(true);
     } else {
       setIsFollowed(false);
     }
-  }, [userLoggedIn]);
+  }, [userLoggedIn, userFollowers]);
+
   const handleOnClick = async (e) => {
     e.stopPropagation()
     if (!userLoggedIn) {
@@ -32,43 +35,40 @@ function FollowButton({
     setIsFollowed((prev) => {
       return !prev;
     });
+
     const userArgs = {
       uid: uid,
-      newField: {
-        followers: isFollowed
-          ? userFollowers.filter((item) => item !== currentUserID)
-          : !userFollowers.includes(uid)
-          ? [...userFollowers, currentUserID]
-          : userFollowers,
-      },
+      fieldName: 'followers',
+      arrayValue: currentUserID
     };
     const currentUserArgs = {
       uid: currentUserID,
-      newField: {
-        following: isFollowed
-          ? currentUserFollowing.filter((item) => item !== uid)
-          : !currentUserFollowing.includes(uid)
-          ? [...currentUserFollowing, uid]
-          : currentUserFollowing,
-      },
+      fieldName: 'following',
+      arrayValue: uid,
     };
     try {
-      await Promise.all([
-        followHandle.mutateAsync(userArgs),
-        followHandle.mutateAsync(currentUserArgs),
-      ]);
-      setUserFollowersState(userArgs.newField.followers)
-      setCurUserFollowingState(currentUserArgs.newField.following)
+      if(!isFollowed) {
+        await Promise.all([
+          handleFollow.mutateAsync(userArgs),
+          handleFollow.mutateAsync(currentUserArgs),
+        ]);
+      } else {
+        await Promise.all([
+          handleUnfollow.mutateAsync(userArgs),
+          handleUnfollow.mutateAsync(currentUserArgs),
+        ]);
+      }
+
     } catch (error) {
       setIsFollowed((prev) => {
         return !prev;
       });
       await Promise.all([
-        followHandle.mutateAsync({
+        abortChanges.mutateAsync({
           uid: uid,
           newField: { followers: userFollowers },
         }),
-        followHandle.mutateAsync({
+        abortChanges.mutateAsync({
           uid: currentUserID,
           newField: { followers: currentUserFollowing },
         }),

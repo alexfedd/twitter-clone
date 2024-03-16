@@ -35,7 +35,6 @@ function Profile() {
     data: postsList,
     isLoading: isPostsLoading,
     isRefetching: isPostsRefetching,
-    error,
     refetch,
   } = useGetSomeDocs(
     numberOfPosts,
@@ -119,18 +118,18 @@ function Profile() {
             </div>
           </div>
           <div className="profile-page__follows-info">
-            <p className="profile-page__follow-info">
+            <Link to={`/profile/${userId}/following`} className="profile-page__follow-info">
               <span className="profile-page__follow-number">
                 {userData?.data().following.length}
               </span>{" "}
               Following
-            </p>
-            <p className="profile-page__follow-info">
+            </Link>
+            <Link to={`/profile/${userId}/followers`} className="profile-page__follow-info">
               <span className="profile-page__follow-number">
                 {userData?.data().followers.length}
               </span>{" "}
               Followers
-            </p>
+            </Link>
           </div>
         </div>
         <h2 className="profile-page__posts-title title-h3">Posts</h2>

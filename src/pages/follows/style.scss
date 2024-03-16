@@ -1,0 +1,31 @@
+.follows-page {
+  &__upper {
+    padding-bottom: 17px;
+    border-bottom: 1px solid #2f3336;
+  }
+  &__tabs {
+    padding: 0 20px;
+    max-width: 500px;
+    margin: 7px auto 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__tab {
+    color: rgb(114, 119, 124);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0%;
+    &--active {
+      color: rgb(231, 233, 234);
+      font-weight: 700;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 12px 20px;
+  }
+}

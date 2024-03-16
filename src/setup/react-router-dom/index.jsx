@@ -5,6 +5,9 @@ import SignUp from "../../pages/sign-up/SignUp";
 import Layout from "../../pages/layout/Layout";
 import Post from "../../pages/post/Post";
 import Profile from "../../pages/profile/Profile";
+import Follows from "../../pages/follows/Follows";
+import Following from "../../pages/follows/components/following/Following";
+import Followers from "../../pages/follows/components/followers/Followers";
 
 
 export const router = createHashRouter([
@@ -23,6 +26,20 @@ export const router = createHashRouter([
             {
                 path: '/profile/:userId',
                 element: <Profile />
+            },
+            {
+                element: <Follows />,
+                children: [
+                    {
+                        element: <Followers />,
+                        path: '/profile/:userId/followers',
+                        
+                    },
+                    {
+                        path: '/profile/:userId/following',
+                        element: <Following/>
+                    }
+                ]
             }
         ]
     },

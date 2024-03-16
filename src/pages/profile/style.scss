@@ -91,6 +91,11 @@
       gap: 10px;
     }
   }
+  &__follow-number {
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none !important;
+  }
   &__follow-info {
     display: flex;
     align-items: center;
@@ -100,11 +105,14 @@
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 2%;
+    cursor: pointer;
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
-  &__follow-number {
-    font-weight: 700;
-    color: #ffffff;
-  }
+
   &__edit-btn {
     display: inline-block;
     padding: 5px 13px;

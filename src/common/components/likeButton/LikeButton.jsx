@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { useUpdateData } from "../../hooks/useUpdateData";
 import { useNavigate } from 'react-router-dom';
+import { useAddToDocArray } from "../../hooks/useAddToDocArray";
+import { useRemoveFromDocArray } from "../../hooks/useRemoveFromDocArray";
 function LikeButton({postData, amountOfPosts}) {
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(postData.likes);
   const { currentUserID, userLoggedIn } = useSelector((state) => state.auth);
   const navigate = useNavigate()
-  const handleLike = useUpdateData(amountOfPosts, 'posts')
+  const abortChanges = useUpdateData(amountOfPosts, 'posts');
+  const handleLike = useAddToDocArray(amountOfPosts, 'posts');
+  const handleUnlike = useRemoveFromDocArray(amountOfPosts, 'posts')
 
   useEffect(() => {
     if(userLoggedIn && postData.likes.includes(currentUserID)) {
@@ -39,16 +43,16 @@ function LikeButton({postData, amountOfPosts}) {
     })
     const likeArgs = {
       uid: postData.id,
-      newField: {
-        likes: isLiked
-          ? postData.likes.filter((item) => item !== currentUserID)
-          : !postData.likes.includes(currentUserID)
-          ? [...postData.likes, currentUserID]
-          : postData.likes,
-      },
+      fieldName: 'likes',
+      arrayValue: currentUserID,
     };
     try {
-      handleLike.mutate(likeArgs);
+      if(!isLiked) {
+        handleLike.mutateAsync((likeArgs));
+      }
+      else {
+        handleUnlike.mutateAsync(likeArgs)
+      }
     } catch (error) {
       setIsLiked((prev) => {
         return !prev;
@@ -61,7 +65,7 @@ function LikeButton({postData, amountOfPosts}) {
           return [...prev, currentUserID]
         }
       })
-      handleLike.mutate({ uid: postData.id, newField: { likes: postData.likes } });
+      abortChanges.mutate({ uid: postData.id, newField: { likes: postData.likes } });
     }
   };
   return (
