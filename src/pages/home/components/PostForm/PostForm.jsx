@@ -43,8 +43,9 @@ function PostForm({ currentUserData, numberOfPosts }) {
         placeholder="What's up?"
         {...register("content")}
         onChange={(e) => {
-          handleChange(e);
           trigger("content"); // Для повторной валидации при изменении содержимого
+          handleChange(e);
+
         }}
       ></textarea>
       <button disabled={handleSendPost.isPending} className="post-form__button">

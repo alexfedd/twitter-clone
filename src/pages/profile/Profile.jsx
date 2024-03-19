@@ -80,7 +80,7 @@ function Profile() {
         </div>
         <div className="profile-page__profile-info-upper">
           {userId === currentUserID ? (
-            <Link to={"/"} className="profile-page__edit-btn">
+            <Link to={"/edit"} className="profile-page__edit-btn">
               Edit profile
             </Link>
           ) : (

@@ -4,7 +4,10 @@
   align-items: center;
   user-select: none;
   gap: 14px;
+  
   &__image-wrapper {
+    border-radius: 50%;
+    overflow: hidden;
     width: 41px;
     height: 41px;
   }
