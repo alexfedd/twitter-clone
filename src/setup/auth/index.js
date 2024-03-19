@@ -9,7 +9,7 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC48ZRL1niIKy2EIPw0aHKt05LfNlQ3cuk",
+  apiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
   authDomain: "twitter-clone-dd834.firebaseapp.com",
   projectId: "twitter-clone-dd834",
   storageBucket: "twitter-clone-dd834.appspot.com",

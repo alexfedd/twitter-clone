@@ -13,6 +13,7 @@ function Layout() {
   useEffect(() => {
     function handleResize() {
       dispatch(setWindowWidth(window.innerWidth));
+      console.log(window.innerWidth);
     }
     handleResize();
     window.addEventListener("resize", handleResize);

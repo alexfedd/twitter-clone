@@ -197,7 +197,7 @@ function Edit() {
               id="your_location"
               placeholder="Your location"
               defaultValue={currentUserData?.data().location}
-              apiKey={"AIzaSyC48ZRL1niIKy2EIPw0aHKt05LfNlQ3cuk"}
+              apiKey={import.meta.env.VITE_GOOGLE_MAPS_API}
               {...register("location")}
               onPlaceSelected={(place) => {
                 setLocation(place.formatted_address);
